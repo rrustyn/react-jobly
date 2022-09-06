@@ -1,5 +1,12 @@
 import { NavLink } from "react-router-dom";
 
+/**  Nav component
+ *
+ * Renders navbar will links to home, companies, and jobs
+ *
+ * App --> Nav
+*/
+
 function Nav() {
   return (
     <ul className="Nav">

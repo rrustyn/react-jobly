@@ -1,5 +1,23 @@
+import { useState } from 'react';
+
+/**  CompanyApp component
+ *
+ * Renders CompaniesList component
+ *
+ * States:
+ * - companies
+ *
+ * App --> RoutesList --> CompanyApp
+*/
+
 function CompanyApp() {
-  return <p>Eventually CompaniesList</p>
+
+  const [companies, setCompanies] = useState(null);
+
+  //function search()
+
+  return <p>Eventually CompaniesList</p>;
+  //<CompaniesList companies={companies} search={search}/>
 }
 
 export default CompanyApp;

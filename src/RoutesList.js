@@ -4,6 +4,17 @@ import CompanyApp from "./CompanyApp";
 import CompanyDetails from "./CompanyDetails";
 import JobsApp from "./JobsApp";
 
+/**  RoutesList component
+ *
+ * List of all routes:
+ * - home
+ * - companies
+ * - companies/:handle
+ * - jobs
+ *
+ * App --> RoutesList
+*/
+
 function RoutesList() {
   return (
     <Routes>
