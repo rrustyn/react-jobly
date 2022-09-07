@@ -1,14 +1,15 @@
 import SearchForm from "./SearchForm";
+import CompanyCard from "./CompanyCard";
 
 /**  CompaniesList component
  *
  * Renders list of all companies received from API
  *
  * Props:
- * - companies
- * - search
+ * - companies: array of company objects
+ * - search: callback function to search against companies
  *
- * App --> RoutesList --> CompanyApp --> CompaniesList
+ * CompanyApp --> CompaniesList --> { SearchForm, CompanyCard}
 */
 
 function CompaniesList({ companies, search }) {
@@ -16,8 +17,10 @@ function CompaniesList({ companies, search }) {
   return (
     <>
       <SearchForm search={search} />
-      <p>Eventually CompaniesList</p>;
-      {/* companies.map(company => <CompanyCard />) */}
+      {companies.length > 0 &&
+        companies.map(company => (
+          <CompanyCard key={company.handle} company={company} />)
+        )}
     </>
   );
 }

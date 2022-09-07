@@ -1,17 +1,24 @@
+import { Link } from "react-router-dom";
+
 
 /**  CompanyCard component
  *
- * Renders information on a company {handle, name, description}
+ * Renders information on a company {name, description, logo}
  *
- * App --> RoutesList --> CompaniesList --> CompanyCard
+ * CompaniesList --> CompanyCard
 */
 
-function CompanyCard() {
+function CompanyCard({ company }) {
+
+  const { name, description, handle, logoUrl } = company;
 
   return (
-    <>
-      <p>Eventually company info</p>;
-    </>
+    <Link to={`/companies/${handle}`}>
+      <div className="CompanyCard">
+        <h3>Company: {name}</h3> <img src={logoUrl} alt={`${name} logo`} />
+        <p>{description}</p>
+      </div>
+    </Link>
   );
 }
 
