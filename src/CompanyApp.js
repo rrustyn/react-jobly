@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
 import CompaniesList from './CompaniesList';
+import Loader from './Loader';
 
 /**  CompanyApp component
  *
@@ -50,8 +51,7 @@ function CompanyApp() {
 
   }
 
-  if (companies.isLoading) return <p>loading...</p>;
-
+  if (companies.isLoading) return <Loader />
   return (
     <CompaniesList
       companies={companies.companiesList}

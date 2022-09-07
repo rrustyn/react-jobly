@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
 import JobsList from './JobsList';
+import Loader from './Loader';
 
 /**  JobApp component
  *
@@ -36,7 +37,7 @@ function JobsApp() {
   }, []);
 
 
-  if (jobs.isLoading) return <h2>Loading ...</h2>;
+  if (jobs.isLoading) return <Loader />;
 
   /** Search function, calls on searchJobs from JoblyApi to find jobs by title
    * from API

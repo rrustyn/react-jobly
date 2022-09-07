@@ -30,15 +30,20 @@ function SearchForm({ search }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="search"
-        placeholder='Enter search term ..'
-        value={formData}
-        onChange={handleChange}
-      />
-      <button>Submit</button>
+    <form className="row g-3 d-flex justify-content-center mt-1 mb-1" onSubmit={handleSubmit}>
+      <div className="form-group col-6">
+        <input
+          className='form-control input-sm '
+          type="text"
+          name="search"
+          placeholder='Enter search term ..'
+          value={formData}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="col-auto">
+        <button className='btn btn-primary'>Submit</button>
+      </div>
     </form>
   );
 }

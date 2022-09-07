@@ -10,12 +10,26 @@ import './Nav.css';
 
 function Nav() {
   return (
-    <ul className="Nav">
-      <NavLink to="/">Jobly</NavLink>
-      <NavLink to="/companies">Companies</NavLink>
-      <NavLink to="/jobs">Jobs</NavLink>
-    </ul>
+    <nav className="navbar bg-light">
+      <ul className="nav d-flex">
+
+        <li className="nav-item navbar-brand">
+          <NavLink className="nav-link " to="/">Jobly</NavLink>
+        </li>
+
+        <li className="nav-item d-inline-flex p-2">
+          <NavLink className="nav-link" to="/companies">Companies</NavLink>
+        </li>
+
+        <li className="nav-item d-inline-flex p-2">
+          <NavLink className="nav-link" to="/jobs">Jobs</NavLink>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
 export default Nav;
+
+
+
