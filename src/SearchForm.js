@@ -15,27 +15,28 @@ import { useState } from 'react';
 
 function SearchForm({ search }) {
 
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState("");
 
   /** Update form input */
   function handleChange(evt) {
     setFormData(evt.target.value);
   }
-  
+
+  /** Handle submit, calls search function from parent and resets formData */
   function handleSubmit(evt) {
     evt.preventDefault();
     search(formData);
     setFormData("");
   }
-  
+
   return (
     <form onSubmit={handleSubmit}>
-      <input 
-      type="text" 
-      name="search"
-      placeholder='Enter search term ..' 
-      value={formData}
-      onChange={handleChange}
+      <input
+        type="text"
+        name="search"
+        placeholder='Enter search term ..'
+        value={formData}
+        onChange={handleChange}
       />
       <button>Submit</button>
     </form>

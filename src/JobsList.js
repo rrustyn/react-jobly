@@ -6,10 +6,10 @@ import SearchForm from "./SearchForm";
  * List of all jobs received from API
  *
  * Props:
- * - jobs
- * - search
+ * - jobs: array of job objects
+ * - search: callback function to search against jobs
  *
- * App --> RoutesList --> JobApp --> JobsList
+ * JobApp --> JobsList --> JobCard
 */
 
 function JobsList({ jobs, search }) {
@@ -17,8 +17,9 @@ function JobsList({ jobs, search }) {
   return (
     <>
       <SearchForm search={search} />
-      <p>Eventually JobsList</p>
-      {/* companies.jobs.map(job => <JobCard job={job}/>) */}
+      {jobs.length > 0 &&
+        jobs.map(job =>
+          <JobCard key={job.id} job={job} />)}
     </>
   );
 }

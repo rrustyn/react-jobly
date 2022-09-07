@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 /**  CompanyCard component
  *
  * Renders information on a company {name, description, logo}

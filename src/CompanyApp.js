@@ -19,34 +19,39 @@ function CompanyApp() {
     isLoading: true
   });
 
+  /** Make API call when component mounts to fetch all companies */
+
   useEffect(function getAllCompaniesOnMount() {
-    
+
     async function getAllCompanies() {
       const res = await JoblyApi.getCompanies();
-      
+
       setCompanies({
         companiesList: res,
         isLoading: false,
       });
     }
-    
+
     getAllCompanies();
   }, []);
-  
+
+  /** Search function, calls on searchCompanies from JoblyApi to find companies
+   * by company name from API
+  */
+
   async function searchCompanies(searchTerm) {
-    
-    console.log("searched for:", searchTerm);
-    
+
     const res = await JoblyApi.searchCompanies(searchTerm);
-    
+
     setCompanies({
       ...companies,
       companiesList: res,
     });
+
   }
 
-  if (companies.isLoading) return <p>loading...</p>
-  
+  if (companies.isLoading) return <p>loading...</p>;
+
   return (
     <CompaniesList
       companies={companies.companiesList}
