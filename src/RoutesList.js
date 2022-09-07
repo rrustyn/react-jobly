@@ -1,8 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Homepage from "./Homepage";
 import CompanyApp from "./CompanyApp";
 import CompanyDetails from "./CompanyDetails";
 import JobsApp from "./JobsApp";
+import SignUpForm from "./SignUpForm";
+import LoginForm from "./LoginForm";
+import Profile from "./Profile";
 
 /**  RoutesList component
  *
@@ -22,6 +25,11 @@ function RoutesList() {
       <Route path="/companies" element={<CompanyApp />} />
       <Route path="/companies/:handle" element={<CompanyDetails />} />
       <Route path="/jobs" element={<JobsApp />} />
+      <Route path="/signup" element={<SignUpForm />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="*" element={<Navigate to="/" />} />
+      
     </Routes>
   );
 }
