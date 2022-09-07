@@ -17,6 +17,7 @@ function CompaniesList({ companies, search }) {
   return (
     <>
       <SearchForm search={search} />
+      {/* if no companies */}
       {companies.length > 0 &&
         companies.map(company => (
           <CompanyCard key={company.handle} company={company} />)

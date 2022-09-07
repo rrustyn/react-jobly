@@ -57,7 +57,8 @@ class JoblyApi {
   /** Get companies that match search criteria */
 
   static async searchCompanies(name) {
-    let res = await this.request(`companies?name=${name}`);
+    //let res = await this.request(`companies?name=${name}`);
+    let res = await this.request(`companies`, { name });
     return res.companies;
   }
 
@@ -71,6 +72,7 @@ class JoblyApi {
   /** Get jobs that match search criteria */
 
   static async searchJobs(title) {
+    //desctructure for title,name
     let res = await this.request(`jobs?title=${title}`);
     return res.jobs;
   }

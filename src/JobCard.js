@@ -19,7 +19,7 @@ function JobCard({ job }) {
   const { title, companyName = null, salary, equity } = job;
 
   return (
-
+    //
     <div className="jobcard">
       <h3>{title}</h3>
       {companyName &&

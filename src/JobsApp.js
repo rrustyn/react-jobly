@@ -54,6 +54,7 @@ function JobsApp() {
   }
 
   return (
+    // check for no jobs
     <JobsList jobs={jobs.jobsList} search={search} />
   );
 
