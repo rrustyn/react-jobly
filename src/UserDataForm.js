@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function UserDataForm({ inputs, save }) {
+function UserDataForm({ inputs, onSubmit }) {
 
   const [formData, setFormData] = useState(inputs);
 
@@ -14,11 +14,11 @@ function UserDataForm({ inputs, save }) {
       [fieldName]: value
     }));
   }
-  
+
   /** Handle form submit, call parent fuction */
   function handleSubmit(event) {
     event.preventDefault();
-    save(formData);
+    onSubmit(formData);
   }
 
   return (
