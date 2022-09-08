@@ -7,10 +7,10 @@ import Loader from './Loader';
  *
  * Renders CompaniesList component
  *
- * States:
+ * State:
  * - companies
  *
- * App --> RoutesList --> CompanyApp
+ * App --> RoutesList --> CompanyApp --> CompaniesList
 */
 
 function CompanyApp() {
@@ -42,7 +42,7 @@ function CompanyApp() {
 
   async function searchCompanies(searchTerm) {
 
-    const res = await JoblyApi.searchCompanies(searchTerm);
+    const res = await JoblyApi.getCompanies(searchTerm);
 
     setCompanies({
       ...companies,

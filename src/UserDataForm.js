@@ -1,5 +1,18 @@
 import { useState } from 'react';
 
+/**
+ * Form for collecting user information
+ * 
+ * Props:
+ * - inputs: input fields to render on form
+ * - onSubmit: function to call when form is submitted
+ * 
+ * State:
+ * - formData: data in form input fields
+ * 
+ * 
+ * { LoginForm, SignUpForm, Profile } --> UserDataForm
+ */
 function UserDataForm({ inputs, onSubmit }) {
 
   const [formData, setFormData] = useState(inputs);

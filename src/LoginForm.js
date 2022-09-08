@@ -1,10 +1,14 @@
-import { useState } from 'react';
 import UserDataForm from './UserDataForm';
 
-
-
+/**
+ * Form for user login
+ * 
+ * Props:
+ * - loginUser: function from App to login user with API passed to UserDataForm
+ * 
+ *  App --> RoutesList --> LoginForm --> UserDataForm
+ */
 function LoginForm({ loginUser }) {
-
 
   const loginFields = {
     username: "",

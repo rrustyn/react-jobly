@@ -17,9 +17,12 @@ function JobsList({ jobs, search }) {
   return (
     <>
       <SearchForm search={search} />
-      {jobs.length > 0 &&
-        jobs.map(job =>
-          <JobCard key={job.id} job={job} />)}
+      {jobs.length > 0
+        ? jobs.map(job =>
+          <JobCard key={job.id} job={job} />)
+          
+        : <p>Sorry, no results matching criteria</p>
+        }
     </>
   );
 }

@@ -8,50 +8,53 @@ import LoginForm from "./LoginForm";
 import Profile from "./Profile";
 import { useContext } from "react";
 import userContext from "./userContext";
-import Logout from "./Logout";
 
 /**  RoutesList component
  *
  * List of all routes:
  * - home
+ * 
+ * if logged out:
+ * - signup
+ * - login
+ * 
+ * if logged in:
  * - companies
  * - companies/:handle
+ * - profile
  * - jobs
  *
  * Props:
- * - loginUser
- * - registerUser
- * - user
+ * - loginUser: function passed down from App
+ * - registerUser: function passed down from App
  *
  * App --> RoutesList
 */
 
-function RoutesList({ loginUser, registerUser, logout }) {
+function RoutesList({ loginUser, registerUser }) {
 
   const { user } = useContext(userContext);
-  console.log(user);
+
   return (
     <Routes>
+      <Route path="/" element={<Homepage />} />
 
-      {(!user ?
+      {(!user
+        ?
         <>
-          <Route path="/" element={<Homepage />} />
           <Route path="/signup" element={<SignUpForm registerUser={registerUser} />} />
           <Route path="/login" element={<LoginForm loginUser={loginUser} />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </> :
+        </>
+        :
         <>
-          <Route path="/" element={<Homepage />} />
           <Route path="/companies" element={<CompanyApp />} />
           <Route path="/companies/:handle" element={<CompanyDetails />} />
           <Route path="/jobs" element={<JobsApp />} />
           <Route path="/profile" element={<Profile setGlobalUser={loginUser} />} />
-          <Route path="/logout" element={<Logout logout={logout} />} />
-          <Route path="*" element={<Navigate to="/" />} />
         </>
       )}
 
-
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

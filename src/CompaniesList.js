@@ -9,7 +9,7 @@ import CompanyCard from "./CompanyCard";
  * - companies: array of company objects
  * - search: callback function to search against companies
  *
- * CompanyApp --> CompaniesList --> { SearchForm, CompanyCard}
+ * CompanyApp --> CompaniesList --> { SearchForm, CompanyCard }
 */
 
 function CompaniesList({ companies, search }) {
@@ -18,10 +18,12 @@ function CompaniesList({ companies, search }) {
     <>
       <SearchForm search={search} />
       {/* if no companies */}
-      {companies.length > 0 &&
-        companies.map(company => (
+      {companies.length > 0
+      ? companies.map(company => (
           <CompanyCard key={company.handle} company={company} />)
-        )}
+        )
+      : <p>Sorry, no results matching criteria</p>
+      }
     </>
   );
 }

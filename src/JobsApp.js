@@ -45,7 +45,7 @@ function JobsApp() {
 
   async function search(searchTerm) {
 
-    const res = await JoblyApi.searchJobs(searchTerm);
+    const res = await JoblyApi.getJobs(searchTerm);
 
     setJobs({
       ...jobs,

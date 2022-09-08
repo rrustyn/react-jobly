@@ -10,8 +10,8 @@ import userContext from './userContext';
 /** Main App component, renders Nav and RoutesList components
  *
  * State:
- * - user
- * - token
+ * - user: object; user data from API, fetched when token updates
+ * - token: string; token from API
  *
  * Context:
  * - user
@@ -26,43 +26,48 @@ function App() {
   const [token, setToken] = useState(localStorage.token);
 
 
+  /** Fetch user data from API on mount and token state change */
   useEffect(function setUserState() {
 
     async function getUserFromAPI() {
-
       const payload = jwt_decode(token);
       const userRes = await JoblyApi.getUser(payload.username);
       setUser(userRes);
-
     }
 
     if (localStorage.token) {
-
       JoblyApi.token = localStorage.token;
       getUserFromAPI();
-
     }
   }, [token]);
 
 
+  /** login a user and sets token recieved in response
+   * used in LoginFrom
+   */
   async function login(credentials) {
 
     const token = await JoblyApi.loginUser(credentials);
+    
     localStorage.setItem('token', token);
-
     setToken(token);
   }
 
-
+  /** register a new user and sets token recieved in response
+   * used in SignUpForm
+  */
   async function register(userInputs) {
 
     const token = await JoblyApi.registerUser(userInputs);
+    
     localStorage.setItem('token', token);
-
     setToken(token);
 
   }
 
+  /** logout a user and resets stored data
+   * used in Logout
+   */
   async function logout() {
     localStorage.clear();
     setToken(null);
@@ -74,8 +79,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <userContext.Provider value={{ user }}>
-          <Nav user={user} />
-          <RoutesList loginUser={login} registerUser={register} logout={logout} />
+          <Nav 
+            logout={logout} />
+          <RoutesList
+            loginUser={login}
+            registerUser={register}
+            logout={logout} />
         </userContext.Provider>
       </BrowserRouter>
     </div>
