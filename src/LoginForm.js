@@ -1,32 +1,18 @@
 import { useState } from 'react';
 import UserDataForm from './UserDataForm';
-import JoblyApi from './api.js';
 
 
 
-function LoginForm({ setGlobalUser }) {
-
-  // const [formData, setFormData] = useState({
-  //   username: null,
-  //   password: null
-  // });
-  //const loginFields = { username, password };
-
-  async function login(input) {
-    const res = await JoblyApi.loginUser(input);
-    //setFormData(res);
-    setGlobalUser(res);
-    // try{
-    // }
-    // catch{
-    //   //error code for bad token/req
-    // }
-  }
+function LoginForm({ loginUser }) {
 
 
+  const loginFields = {
+    username: "",
+    password: ""
+  };
 
   return (
-    <UserDataForm inputs={loginFields} onSubmit={login} />
+    <UserDataForm inputs={loginFields} onSubmit={loginUser} />
   );
 }
 

@@ -51,7 +51,8 @@ function CompanyApp() {
 
   }
 
-  if (companies.isLoading) return <Loader />
+  if (companies.isLoading) return <Loader />;
+  
   return (
     <CompaniesList
       companies={companies.companiesList}

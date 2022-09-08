@@ -18,16 +18,16 @@ import Profile from "./Profile";
  * App --> RoutesList
 */
 
-function RoutesList({ setGlobalUser }) {
+function RoutesList({ loginUser,  }) {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/companies" element={<CompanyApp />} />
       <Route path="/companies/:handle" element={<CompanyDetails />} />
       <Route path="/jobs" element={<JobsApp />} />
-      <Route path="/signup" element={<SignUpForm setGlobalUser={setGlobalUser} />} />
-      <Route path="/login" element={<LoginForm setGlobalUser={setGlobalUser} />} />
-      <Route path="/profile" element={<Profile setGlobalUser={setGlobalUser} />} />
+      <Route path="/signup" element={<SignUpForm setGlobalUser={loginUser} />} />
+      <Route path="/login" element={<LoginForm loginUser={loginUser} />} />
+      <Route path="/profile" element={<Profile setGlobalUser={loginUser} />} />
       <Route path="*" element={<Navigate to="/" />} />
 
     </Routes>

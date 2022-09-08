@@ -18,11 +18,12 @@ function UserDataForm({ inputs, onSubmit }) {
   /** Handle form submit, call parent fuction */
   function handleSubmit(event) {
     event.preventDefault();
+    //console.log("form data in userdata form is:", formData);
     onSubmit(formData);
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {Object.keys(inputs).map(input => (
         <label
           htmlFor={input}>{input}:
@@ -35,7 +36,7 @@ function UserDataForm({ inputs, onSubmit }) {
           />
         </label>
       ))}
-      <button onSubmit={handleSubmit}>Submit</button>
+      <button>Submit</button>
     </form>
   );
 }
