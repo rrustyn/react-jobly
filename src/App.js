@@ -5,55 +5,78 @@ import RoutesList from "./RoutesList";
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
 import jwt_decode from 'jwt-decode';
+import userContext from './userContext';
 
 /** Main App component, renders Nav and RoutesList components
  *
  * State:
  * - user
+ * - token
+ *
+ * Context:
+ * - user
+ *
+ * App --> { Nav, RoutesList }
 */
 
 function App() {
 
-  const [user, setUser] = useState({
-    userData: null
+  const [user, setUser] = useState(null);
 
-  });
+  const [token, setToken] = useState(localStorage.token);
 
-  //when mount, check localStorage for token to auth user
-  //useEffect();
 
-  // function setGlobalUser(formData) {
-  //   setUser(formData);
-  // }
-  //need token from server
-  //useEffect check token
+  useEffect(function setUserState() {
 
-  //login/register/auth defined here and prop drill down
-  //ifelse for error, further study, pass error back to component as prop,
-  //  render component with error msg
+    async function getUserFromAPI() {
 
-  //token will have username, make another api call
+      const payload = jwt_decode(token);
+      const userRes = await JoblyApi.getUser(payload.username);
+      setUser(userRes);
+
+    }
+
+    if (localStorage.token) {
+
+      JoblyApi.token = localStorage.token;
+      getUserFromAPI();
+
+    }
+  }, [token]);
+
+
   async function login(credentials) {
-    
-    //console.log("the credentials are:", credentials)
-    
-    const loginRes = await JoblyApi.loginUser(credentials);
-    const payload = jwt_decode(loginRes);
-    
-    //console.log("the payload is", payload);
-    
-    const userRes = await JoblyApi.getUser(payload.username);
-    
-    //console.log("the userRes is:", userRes)
-    
-    setUser({userRes})
+
+    const token = await JoblyApi.loginUser(credentials);
+    localStorage.setItem('token', token);
+
+    setToken(token);
   }
+
+
+  async function register(userInputs) {
+
+    const token = await JoblyApi.registerUser(userInputs);
+    localStorage.setItem('token', token);
+
+    setToken(token);
+
+  }
+
+  async function logout() {
+    localStorage.clear();
+    setToken(null);
+    setUser(null);
+  }
+
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav />
-        <RoutesList  loginUser={login}/>
+        <userContext.Provider value={{ user }}>
+          <Nav user={user} />
+          <RoutesList loginUser={login} registerUser={register} logout={logout} />
+        </userContext.Provider>
       </BrowserRouter>
     </div>
   );

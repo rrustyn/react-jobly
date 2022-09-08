@@ -6,6 +6,9 @@ import JobsApp from "./JobsApp";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import Profile from "./Profile";
+import { useContext } from "react";
+import userContext from "./userContext";
+import Logout from "./Logout";
 
 /**  RoutesList component
  *
@@ -15,20 +18,39 @@ import Profile from "./Profile";
  * - companies/:handle
  * - jobs
  *
+ * Props:
+ * - loginUser
+ * - registerUser
+ * - user
+ *
  * App --> RoutesList
 */
 
-function RoutesList({ loginUser,  }) {
+function RoutesList({ loginUser, registerUser, logout }) {
+
+  const { user } = useContext(userContext);
+  console.log(user);
   return (
     <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/companies" element={<CompanyApp />} />
-      <Route path="/companies/:handle" element={<CompanyDetails />} />
-      <Route path="/jobs" element={<JobsApp />} />
-      <Route path="/signup" element={<SignUpForm setGlobalUser={loginUser} />} />
-      <Route path="/login" element={<LoginForm loginUser={loginUser} />} />
-      <Route path="/profile" element={<Profile setGlobalUser={loginUser} />} />
-      <Route path="*" element={<Navigate to="/" />} />
+
+      {(!user ?
+        <>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/signup" element={<SignUpForm registerUser={registerUser} />} />
+          <Route path="/login" element={<LoginForm loginUser={loginUser} />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </> :
+        <>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/companies" element={<CompanyApp />} />
+          <Route path="/companies/:handle" element={<CompanyDetails />} />
+          <Route path="/jobs" element={<JobsApp />} />
+          <Route path="/profile" element={<Profile setGlobalUser={loginUser} />} />
+          <Route path="/logout" element={<Logout logout={logout} />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
+      )}
+
 
     </Routes>
   );

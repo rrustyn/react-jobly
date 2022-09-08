@@ -18,7 +18,7 @@ class JoblyApi {
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
-  static async request(endpoint, data = {}, method = "get") {
+  static async request(endpoint, data = {}, method = "get",) {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
@@ -79,7 +79,7 @@ class JoblyApi {
 
   /** Register User */
   static async registerUser(user) {
-    let res = await this.request(`register`, user, "post");
+    let res = await this.request(`auth/register`, user, "post");
     return res.token;
   }
 
@@ -88,13 +88,14 @@ class JoblyApi {
     let res = await this.request(`auth/token`, { username, password }, "post");
     return res.token;
   }
-  
+
   /** Get users data */
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
     return res.user;
-    
+
   }
+
 
 }
 

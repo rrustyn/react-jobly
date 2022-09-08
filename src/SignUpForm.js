@@ -1,27 +1,17 @@
-import { useState } from 'react';
 import UserDataForm from './UserDataForm';
-import JoblyApi from './api';
 
-function SignUpForm({ setGlobalUser }) {
+function SignUpForm({ registerUser }) {
 
-  const [user, setUser] = useState({
-    username: null,
-    password: null,
-    firstName: null,
-    lastName: null,
-    email: null
-  });
-
-  async function handleSave(input) {
-    const res = await JoblyApi.registerUser(input);
-    //unpack res and grab res.token from API
-    //use to set global user
-    setGlobalUser(res);
-    setUser(res);
-  }
+  const inputFields = {
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    email: ''
+  };
 
   return (
-    <UserDataForm inputs={user} save={handleSave} />
+    <UserDataForm inputs={inputFields} onSubmit={registerUser} />
   );
 }
 

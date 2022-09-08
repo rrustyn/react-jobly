@@ -26,7 +26,7 @@ function UserDataForm({ inputs, onSubmit }) {
     <form onSubmit={handleSubmit}>
       {Object.keys(inputs).map(input => (
         <label
-          htmlFor={input}>{input}:
+          key={input} htmlFor={input}>{input}:
           <input
             type="text"
             id={input}

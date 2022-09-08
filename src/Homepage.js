@@ -1,3 +1,5 @@
+import userContext from "./userContext";
+import { useContext } from "react";
 
 /**  Homepage component
  *
@@ -7,7 +9,17 @@
 */
 
 function Homepage() {
-  return <p>Welcome to Jobly</p>;
+
+  const { user } = useContext(userContext);
+
+  return (
+    <>
+      {user
+        ? <h1>Welcome back, {user.username}</h1>
+        : <h1>Welcome to Jobly</h1>
+      }
+    </>
+  );
 }
 
 export default Homepage;
