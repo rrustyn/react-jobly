@@ -4,7 +4,15 @@ import { useState } from 'react';
  * Form for collecting user information
  *
  * Props:
- * - inputs: input fields to render on form
+ * - inputs: array of objects with formatting information for inputs
+ *    {
+ *     name : name for label and input id, 
+ *     type : input type, 
+ *     value: default value for input, 
+ *     display: label name, 
+ *     optional: isDisabled, a boolean to disable input
+ *    }
+ * 
  * - onSubmit: function to call when form is submitted
  *
  * State:
@@ -15,8 +23,8 @@ import { useState } from 'react';
  */
 function UserDataForm({ inputs, onSubmit }) {
 
+  //render initial form based on inputs passed in
   const initialForm = {};
-
   for (let input of inputs) {
     initialForm[input.name] = input.value;
   }
@@ -37,9 +45,7 @@ function UserDataForm({ inputs, onSubmit }) {
   /** Handle form submit, call parent fuction */
   function handleSubmit(event) {
     event.preventDefault();
-    //console.log("form data in userdata form is:", formData);
     onSubmit(formData);
-
   }
 
   return (

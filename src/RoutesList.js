@@ -40,7 +40,7 @@ function RoutesList({ loginUser, registerUser, updateUser }) {
     <Routes>
       <Route path="/" element={<Homepage />} />
 
-      {(!user
+      {(!user.userData
         ?
         <>
           <Route path="/signup" element={<SignUpForm registerUser={registerUser} />} />

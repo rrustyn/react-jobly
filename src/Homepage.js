@@ -14,8 +14,8 @@ function Homepage() {
 
   return (
     <>
-      {user
-        ? <h1>Welcome back, {user.username}</h1>
+      {user.userData
+        ? <h1>Welcome back, {user.userData.username}</h1>
         : <h1>Welcome to Jobly</h1>
       }
     </>

@@ -22,6 +22,8 @@ import Loader from './Loader';
 
 //GLOBAL TOKEN CONSTANT FOR LOCALSTORAGE TOKEN NAME
 
+const API_TOKEN = "token";
+
 function App() {
 
   const [user, setUser] = useState({
@@ -30,21 +32,29 @@ function App() {
   });
 
   //localStorage.getItem(token)
-  const [token, setToken] = useState(localStorage.token || null);
+  const [token, setToken] = useState(localStorage.getItem(API_TOKEN) || null);
 
 
   /** Fetch user data from API on mount and token state change */
   useEffect(function setUserState() {
 
     async function getUserFromAPI() {
-      const payload = jwt_decode(token);
+      const payload = jwt_decode(localStorage.getItem(API_TOKEN));
       const userRes = await JoblyApi.getUser(payload.username);
-      setUser(userRes);
+      setUser({
+        userData: userRes,
+        isLoading: false
+      });
     }
 
     if (localStorage.token) {
       JoblyApi.token = localStorage.token;
       getUserFromAPI();
+    } else {
+      setUser(u => ({
+        ...u,
+        isLoading: false
+      }))
     }
   }, [token]);
 
@@ -55,7 +65,7 @@ function App() {
 
     const token = await JoblyApi.loginUser(credentials);
 
-    localStorage.setItem('token', token);
+    localStorage.setItem(API_TOKEN, token);
     setToken(token);
   }
 
@@ -66,7 +76,7 @@ function App() {
 
     const token = await JoblyApi.registerUser(userInputs);
 
-    localStorage.setItem('token', token);
+    localStorage.setItem(API_TOKEN, token);
     setToken(token);
 
   }
@@ -77,8 +87,11 @@ function App() {
       lastName: userInputs.lastName,
       email: userInputs.email
     };
-    const res = await JoblyApi.updateUser(user.username, updateInfo);
-    setUser(res);
+    const res = await JoblyApi.updateUser(user.userData.username, updateInfo);
+    setUser(u => ({
+      ...u,
+      userData: res
+    }));
   }
 
   /** logout a user and resets stored data
@@ -86,9 +99,12 @@ function App() {
    */
   async function logout() {
     //.removeItem(key)
-    localStorage.clear();
+    localStorage.removeItem(API_TOKEN);
     setToken(null);
-    setUser(null);
+    setUser(u => ({
+      ...u,
+      userData: null,
+    }));
   }
 
 

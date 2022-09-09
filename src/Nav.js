@@ -27,7 +27,7 @@ function Nav({ logout }) {
           <NavLink className="nav-link " to="/">Jobly</NavLink>
         </li>
         
-        {user
+        {user.userData
           ? <>
             <li className="nav-item d-inline-flex p-2">
               <NavLink className="nav-link" to="/companies">Companies</NavLink>
@@ -43,7 +43,7 @@ function Nav({ logout }) {
 
             <li className="nav-item d-inline-flex p-2">
               <Link className="nav-link" onClick={logout} to="/">
-                Logout {user.username}
+                Logout {user.userData.username}
               </Link>
             </li>
           </>
