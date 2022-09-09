@@ -47,8 +47,8 @@ class JoblyApi {
 
   }
 
-  /** Get all companies, 
-   * optional: name to filter results 
+  /** Get all companies,
+   * optional: name to filter results
    */
 
   static async getCompanies(name) {
@@ -82,10 +82,11 @@ class JoblyApi {
     let res = await this.request(`users/${username}`);
     return res.user;
   }
-  
+
   /** Update a user */
   static async updateUser(username, updateData) {
-    delete updateData.username;
+    //do not alter state here
+    //delete updateData.username;
     let res = await this.request(`users/${username}`, updateData, "patch");
     return res.user;
   }

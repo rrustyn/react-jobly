@@ -2,15 +2,15 @@ import { useState } from 'react';
 
 /**
  * Form for collecting user information
- * 
+ *
  * Props:
  * - inputs: input fields to render on form
  * - onSubmit: function to call when form is submitted
- * 
+ *
  * State:
  * - formData: data in form input
- * 
- * 
+ *
+ *
  * { LoginForm, SignUpForm, Profile } --> UserDataForm
  */
 function UserDataForm({ inputs, onSubmit }) {
@@ -39,6 +39,7 @@ function UserDataForm({ inputs, onSubmit }) {
     event.preventDefault();
     //console.log("form data in userdata form is:", formData);
     onSubmit(formData);
+
   }
 
   return (

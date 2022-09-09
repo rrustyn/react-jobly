@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import JoblyApi from './api';
 import jwt_decode from 'jwt-decode';
 import userContext from './userContext';
+import Loader from './Loader';
 
 /** Main App component, renders Nav and RoutesList components
  *
@@ -23,7 +24,10 @@ import userContext from './userContext';
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    userData: null,
+    isLoading: true
+  });
 
   //localStorage.getItem(token)
   const [token, setToken] = useState(localStorage.token || null);
@@ -43,7 +47,6 @@ function App() {
       getUserFromAPI();
     }
   }, [token]);
-
 
   /** login a user and sets token recieved in response
    * used in LoginFrom
@@ -67,9 +70,14 @@ function App() {
     setToken(token);
 
   }
-  
+
   async function updateUser(userInputs) {
-    const res = await JoblyApi.updateUser(user.username, userInputs);
+    const updateInfo = {
+      firstName: userInputs.firstName,
+      lastName: userInputs.lastName,
+      email: userInputs.email
+    };
+    const res = await JoblyApi.updateUser(user.username, updateInfo);
     setUser(res);
   }
 
@@ -90,11 +98,15 @@ function App() {
         <userContext.Provider value={{ user }}>
           <Nav
             logout={logout} />
-          <RoutesList
-            loginUser={login}
-            registerUser={register}
-            updateUser={updateUser}
-          />
+          {user.isLoading
+            ?
+            <Loader />
+            :
+            <RoutesList
+              loginUser={login}
+              registerUser={register}
+              updateUser={updateUser}
+            />}
         </userContext.Provider>
       </BrowserRouter>
     </div>
