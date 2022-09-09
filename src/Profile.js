@@ -1,4 +1,6 @@
 import UserDataForm from "./UserDataForm";
+import {useContext} from "react";
+import userContext from "./userContext";
 
 /** Profile component, renders UserDataForm to display profile edit page
  *
@@ -9,12 +11,20 @@ import UserDataForm from "./UserDataForm";
  *
 */
 
-function Profile({ user, save }) {
+function Profile({ updateUser }) {
+  
+  const { user } = useContext(userContext);
 
+  const inputFields = [
+    {type: "text", value: user.username, display: "Username", name: "username", isDisabled: true},
+    {type: "text", value: user.firstName, display: "First Name", name: "firstName"},
+    {type: "text", value: user.lastName, display: "Last Name", name: "lastName"},
+    {type: "email", value: user.email, display: "email", name: "email"}
+  ]
+  
   return (
     <>
-      <h2>Profile</h2>
-      <UserDataForm user={user} save={save} />
+      <UserDataForm inputs={inputFields} onSubmit={updateUser} />
     </>
   );
 }

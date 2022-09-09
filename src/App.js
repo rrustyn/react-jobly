@@ -19,11 +19,14 @@ import userContext from './userContext';
  * App --> { Nav, RoutesList }
 */
 
+//GLOBAL TOKEN CONSTANT FOR LOCALSTORAGE TOKEN NAME
+
 function App() {
 
   const [user, setUser] = useState(null);
 
-  const [token, setToken] = useState(localStorage.token);
+  //localStorage.getItem(token)
+  const [token, setToken] = useState(localStorage.token || null);
 
 
   /** Fetch user data from API on mount and token state change */
@@ -48,7 +51,7 @@ function App() {
   async function login(credentials) {
 
     const token = await JoblyApi.loginUser(credentials);
-    
+
     localStorage.setItem('token', token);
     setToken(token);
   }
@@ -59,16 +62,22 @@ function App() {
   async function register(userInputs) {
 
     const token = await JoblyApi.registerUser(userInputs);
-    
+
     localStorage.setItem('token', token);
     setToken(token);
 
+  }
+  
+  async function updateUser(userInputs) {
+    const res = await JoblyApi.updateUser(user.username, userInputs);
+    setUser(res);
   }
 
   /** logout a user and resets stored data
    * used in Logout
    */
   async function logout() {
+    //.removeItem(key)
     localStorage.clear();
     setToken(null);
     setUser(null);
@@ -79,12 +88,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <userContext.Provider value={{ user }}>
-          <Nav 
+          <Nav
             logout={logout} />
           <RoutesList
             loginUser={login}
             registerUser={register}
-            logout={logout} />
+            updateUser={updateUser}
+          />
         </userContext.Provider>
       </BrowserRouter>
     </div>

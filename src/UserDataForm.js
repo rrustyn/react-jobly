@@ -8,14 +8,20 @@ import { useState } from 'react';
  * - onSubmit: function to call when form is submitted
  * 
  * State:
- * - formData: data in form input fields
+ * - formData: data in form input
  * 
  * 
  * { LoginForm, SignUpForm, Profile } --> UserDataForm
  */
 function UserDataForm({ inputs, onSubmit }) {
 
-  const [formData, setFormData] = useState(inputs);
+  const initialForm = {};
+
+  for (let input of inputs) {
+    initialForm[input.name] = input.value;
+  }
+
+  const [formData, setFormData] = useState(initialForm);
 
   /** Update form input */
   function handleChange(evt) {
@@ -37,15 +43,16 @@ function UserDataForm({ inputs, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {Object.keys(inputs).map(input => (
+      {inputs.map(input => (
         <label
-          key={input} htmlFor={input}>{input}:
+          key={input.name} htmlFor={input.name}>{input.display}:
           <input
-            type="text"
-            id={input}
-            name={input}
+            type={input.type}
+            id={input.name}
+            name={input.name}
             onChange={handleChange}
-            value={formData[input]}
+            value={formData[input.name]}
+            disabled={input.isDisabled || false}
           />
         </label>
       ))}

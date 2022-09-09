@@ -31,9 +31,10 @@ import userContext from "./userContext";
  * App --> RoutesList
 */
 
-function RoutesList({ loginUser, registerUser }) {
+function RoutesList({ loginUser, registerUser, updateUser }) {
 
   const { user } = useContext(userContext);
+  console.log("the user is:" , user);
 
   return (
     <Routes>
@@ -50,7 +51,7 @@ function RoutesList({ loginUser, registerUser }) {
           <Route path="/companies" element={<CompanyApp />} />
           <Route path="/companies/:handle" element={<CompanyDetails />} />
           <Route path="/jobs" element={<JobsApp />} />
-          <Route path="/profile" element={<Profile setGlobalUser={loginUser} />} />
+          <Route path="/profile" element={<Profile updateUser={updateUser} />} />
         </>
       )}
 

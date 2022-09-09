@@ -10,13 +10,14 @@ import UserDataForm from './UserDataForm';
  */
 function LoginForm({ loginUser }) {
 
-  const loginFields = {
-    username: "",
-    password: ""
-  };
+  //object with field things
+  const inputFields = [
+    {type: "text", value: "", display: "Username", name: "username"},
+    {type: "password", value: "", display: "Password", name: "password"}
+  ]
 
   return (
-    <UserDataForm inputs={loginFields} onSubmit={loginUser} />
+    <UserDataForm inputs={inputFields} onSubmit={loginUser} />
   );
 }
 

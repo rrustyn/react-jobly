@@ -11,13 +11,13 @@ import UserDataForm from './UserDataForm';
  */
 function SignUpForm({ registerUser }) {
 
-  const inputFields = {
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    email: ''
-  };
+  const inputFields = [
+    {type: "text", value: "", display: "Username", name: "username"},
+    {type: "password", value: "", display: "Password", name: "password"},
+    {type: "text", value: "", display: "First Name", name: "firstName"},
+    {type: "text", value: "", display: "Last Name", name: "lastName"},
+    {type: "email", value: "", display: "email", name: "email"}
+  ]
 
   return (
     <UserDataForm inputs={inputFields} onSubmit={registerUser} />
