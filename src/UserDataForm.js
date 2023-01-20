@@ -1,3 +1,4 @@
+import { Form, Col, Button } from 'react-bootstrap';
 import { useState } from 'react';
 
 /**
@@ -49,23 +50,26 @@ function UserDataForm({ inputs, onSubmit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {inputs.map(input => (
-        <label
-          key={input.name} htmlFor={input.name}>{input.display}:
-          <input
-            type={input.type}
-            id={input.name}
-            name={input.name}
-            onChange={handleChange}
-            value={formData[input.name]}
-            disabled={input.isDisabled || false}
-          />
-        </label>
-      ))}
-      <button>Submit</button>
-    </form>
+    <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+      <Form className="mx-auto" onSubmit={handleSubmit}>
+        {inputs.map(input => (
+          <Form.Group as={Col} key={input.name} controlId={input.name}>
+            <Form.Label>{input.display}</Form.Label>
+            <Form.Control
+              type={input.type}
+              name={input.name}
+              onChange={handleChange}
+              value={formData[input.name]}
+              disabled={input.isDisabled || false}
+            />
+          </Form.Group>
+        ))}
+        <Button type="submit" className="mt-3 mb-3">Submit</Button>
+      </Form>
+    </div>
   );
+
 }
 
 export default UserDataForm;
+

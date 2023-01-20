@@ -1,5 +1,6 @@
 import SearchForm from "./SearchForm";
 import CompanyCard from "./CompanyCard";
+import { Col, Row } from "react-bootstrap";
 
 /**  CompaniesList component
  *
@@ -17,15 +18,18 @@ function CompaniesList({ companies, search }) {
   return (
     <>
       <SearchForm search={search} />
-      {/* if no companies */}
-      {companies.length > 0
-      ? companies.map(company => (
-          <CompanyCard key={company.handle} company={company} />)
-        )
-      : <p>Sorry, no results matching criteria</p>
-      }
+      <Row className=" d-flex justify-content-center">
+        {companies.length > 0
+          ? companies.map(company => (
+            <Col key={company.handle} xs={8}>
+              <CompanyCard company={company} />
+            </Col>
+          ))
+          : <p>Sorry, no results matching criteria</p>
+        }
+      </Row>
     </>
   );
 }
 
-export default CompaniesList;
+export default CompaniesList;;

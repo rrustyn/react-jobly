@@ -34,7 +34,8 @@ function CompanyDetails() {
       });
     }
     getCompanyDetails();
-  }, []);
+  }, [companyHandle]);
+
 
   if (company.isLoading) return <h2>Loading ...</h2>;
 

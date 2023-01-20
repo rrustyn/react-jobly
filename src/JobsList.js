@@ -1,5 +1,8 @@
 import JobCard from "./JobCard";
 import SearchForm from "./SearchForm";
+import { Row, Col } from 'react-bootstrap';
+
+
 
 /**  JobsList component
  *
@@ -13,18 +16,25 @@ import SearchForm from "./SearchForm";
 */
 
 function JobsList({ jobs, search }) {
-
   return (
     <>
       <SearchForm search={search} />
-      {jobs.length > 0
-        ? jobs.map(job =>
-          <JobCard key={job.id} job={job} />)
-          
-        : <p>Sorry, no results matching criteria</p>
+      <Row>
+        {jobs.length > 0
+          ? jobs.map((job) => (
+            <Col key={job.id} xs={4}>
+              <JobCard job={job} />
+            </Col>
+          ))
+          : <p>Sorry, no results matching criteria</p>
         }
+      </Row>
     </>
   );
 }
 
 export default JobsList;
+
+
+
+

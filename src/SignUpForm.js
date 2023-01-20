@@ -20,7 +20,9 @@ function SignUpForm({ registerUser }) {
   ]
 
   return (
+    <div className="mx-auto">
     <UserDataForm inputs={inputFields} onSubmit={registerUser} />
+    </div>
   );
 }
 

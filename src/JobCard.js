@@ -1,3 +1,5 @@
+import { Card, Row, Col } from 'react-bootstrap';
+
 
 /**  JobCard component
  *
@@ -19,14 +21,14 @@ function JobCard({ job }) {
   const { title, companyName = null, salary, equity } = job;
 
   return (
-    //
-    <div className="jobcard">
-      <h3>{title}</h3>
-      {companyName &&
-        <h4>{companyName}</h4>}
-      <p>Salary: {salary}</p>
-      <p>Equity: {equity}</p>
-    </div>
+    <Card className="text-center w-75 my-3 mx-auto">
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        {companyName && <Card.Subtitle>{companyName}</Card.Subtitle>}
+        <Card.Text>Salary: {salary}</Card.Text>
+        <Card.Text>Equity: {equity}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
 

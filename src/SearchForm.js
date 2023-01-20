@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Form, FormControl, Button } from 'react-bootstrap';
+
 
 /** SearchForm component
  *
@@ -30,21 +32,16 @@ function SearchForm({ search }) {
   }
 
   return (
-    <form className="row g-3 d-flex justify-content-center mt-1 mb-1" onSubmit={handleSubmit}>
-      <div className="form-group col-6">
-        <input
-          className='form-control input-sm '
-          type="text"
-          name="search"
-          placeholder='Enter search term ..'
-          value={formData}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="col-auto">
-        <button className='btn btn-primary'>Submit</button>
-      </div>
-    </form>
+    <Form onSubmit={handleSubmit} className="d-flex my-3 col-6 mx-auto justify-content-center">
+      <FormControl
+        type="text"
+        placeholder="Enter search term"
+        value={formData}
+        onChange={handleChange}
+        className="mr-2"
+      />
+      <Button className="mx-1" variant="primary" type="submit">Submit</Button>
+    </Form>
   );
 }
 
