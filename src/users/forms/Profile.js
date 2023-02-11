@@ -1,6 +1,7 @@
-import UserDataForm from "./UserDataForm";
+import UserDataForm from "../../common/UserDataForm";
 import { useContext } from "react";
-import userContext from "./userContext";
+import userContext from "../../userContext";
+import "./Form.css";
 
 /** Profile component, renders UserDataForm to display profile edit page
  *
@@ -47,9 +48,9 @@ function Profile({ updateUser }) {
   ];
 
   return (
-    <>
+    <div className="Form">
       <UserDataForm inputs={inputFields} onSubmit={updateUser} />
-    </>
+    </div>
   );
 }
 

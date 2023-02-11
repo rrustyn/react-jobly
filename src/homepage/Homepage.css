@@ -1,0 +1,17 @@
+.Homepage {
+    height: calc(100vh - 150px);
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgb(52, 48,47);
+}
+
+.container {
+    width: 33vw;
+    background-color: rgba(200,200,200,.85);
+    border-radius: 10px;
+}
+
+.btn {
+    box-shadow: 2px 2px 5px rgb(52, 48,47);;
+}

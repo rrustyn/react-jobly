@@ -1,12 +1,12 @@
-import './App.css';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Nav from "./Nav";
-import RoutesList from "./RoutesList";
+import Nav from "./routes-nav/Nav";
+import RoutesList from "./routes-nav/RoutesList";
 import { useState, useEffect } from 'react';
-import JoblyApi from './api';
+import JoblyApi from './api/api';
 import jwt_decode from 'jwt-decode';
 import userContext from './userContext';
-import Loader from './Loader';
+import Loader from './common/Loader';
 
 /** Main App component, renders Nav and RoutesList components
  *
@@ -113,7 +113,8 @@ function App() {
       <BrowserRouter>
         <userContext.Provider value={{ user }}>
           <Nav
-            logout={logout} />
+            logout={logout} 
+          />
           {user.isLoading
             ?
             <Loader />

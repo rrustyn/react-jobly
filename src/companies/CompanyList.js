@@ -1,4 +1,4 @@
-import SearchForm from "./SearchForm";
+import SearchForm from "../common/SearchForm";
 import CompanyCard from "./CompanyCard";
 import { Col, Row } from "react-bootstrap";
 
@@ -13,7 +13,7 @@ import { Col, Row } from "react-bootstrap";
  * CompanyApp --> CompaniesList --> { SearchForm, CompanyCard }
 */
 
-function CompaniesList({ companies, search }) {
+function CompanyList({ companies, search }) {
 
   return (
     <>
@@ -32,4 +32,4 @@ function CompaniesList({ companies, search }) {
   );
 }
 
-export default CompaniesList;;
+export default CompanyList;;

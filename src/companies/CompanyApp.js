@@ -1,34 +1,33 @@
 import { useState, useEffect } from 'react';
-import JoblyApi from './api';
-import CompaniesList from './CompaniesList';
-import Loader from './Loader';
+import JoblyApi from '../api/api';
+import CompanyList from './CompanyList';
+import Loader from '../common/Loader';
 
 /**  CompanyApp component
  *
- * Renders CompaniesList component
+ * Renders companyList component
  *
  * State:
- * - companies
+ * - companies {obj}: 
+ *      - companyList: list of companies from backend API request
+ *      - isLoading: boolean updated with API response
  *
- * App --> RoutesList --> CompanyApp --> CompaniesList
+ * RoutesList --> CompanyApp --> CompanyList
 */
 
 function CompanyApp() {
-
   const [companies, setCompanies] = useState({
-    companiesList: [],
+    list: [],
     isLoading: true
   });
 
   /** Make API call when component mounts to fetch all companies */
-
   useEffect(function getAllCompaniesOnMount() {
 
     async function getAllCompanies() {
       const res = await JoblyApi.getCompanies();
-
       setCompanies({
-        companiesList: res,
+        list: res,
         isLoading: false,
       });
     }
@@ -36,26 +35,20 @@ function CompanyApp() {
     getAllCompanies();
   }, []);
 
-  /** Search function, calls on searchCompanies from JoblyApi to find companies
-   * by company name from API
-  */
-
+  /** Search function makes to filter companies by name */
   async function searchCompanies(searchTerm) {
-
     const res = await JoblyApi.getCompanies(searchTerm);
-
     setCompanies({
       ...companies,
-      companiesList: res,
+      list: res,
     });
-
   }
 
   if (companies.isLoading) return <Loader />;
-  
+
   return (
-    <CompaniesList
-      companies={companies.companiesList}
+    <CompanyList
+      companies={companies.list}
       search={searchCompanies}
     />
   );

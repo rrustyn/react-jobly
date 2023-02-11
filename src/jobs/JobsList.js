@@ -1,5 +1,5 @@
 import JobCard from "./JobCard";
-import SearchForm from "./SearchForm";
+import SearchForm from "../common/SearchForm";
 import { Row, Col } from 'react-bootstrap';
 
 

@@ -1,4 +1,5 @@
-import UserDataForm from './UserDataForm';
+import UserDataForm from '../../common/UserDataForm';
+import "./Form.css";
 
 /**
  * Form for user signup
@@ -20,7 +21,7 @@ function SignUpForm({ registerUser }) {
   ]
 
   return (
-    <div className="mx-auto">
+    <div className="Form">
     <UserDataForm inputs={inputFields} onSubmit={registerUser} />
     </div>
   );
